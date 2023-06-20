@@ -12,6 +12,8 @@ class character
         int movX, movY;
     public:
         character();
+        int getX() const;
+        int getY() const;
         void mov(int,int);
         void special_skill();
         void basic_attack();

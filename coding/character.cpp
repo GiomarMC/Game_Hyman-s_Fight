@@ -4,21 +4,27 @@
 
 character::character()
 {
-    life = 100;
+    life = 3;
     name = "Player";
     movX = 0;
     movY = 0;
     this -> powerup = nullptr;
 }
 
+int character::getX() const
+{
+    return movX;
+}
+
+int character::getY() const
+{
+    return movY;
+}
+
 void character::mov(int x, int y)
 {
-    HANDLE hcon;
-    hcon = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD dwPos;
-    dwPos.X = x;
-    dwPos.Y = y;
-    SetConsoleCursorPosition(hcon, dwPos);
+    movX += x;
+    movY += y;
 }
 
 void character::special_skill()
@@ -39,5 +45,5 @@ void character::setpowerUp(PowerUp* poweup)
 
 character::~character()
 {
-    delete[] powerup;
+    delete powerup;
 }
