@@ -27,16 +27,6 @@ void character::mov(int x, int y)
     movY += y;
 }
 
-void character::special_skill()
-{
-    std::cout << "Ejecutando habilidad especial";
-}
-
-void character::basic_attack()
-{
-    std::cout << "Ejecutando ataque basico";
-}
-
 void character::setpowerUp(PowerUp* poweup)
 {
     this -> powerup = powerup;

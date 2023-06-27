@@ -3,18 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include "character.h"
-#include "personaje.h"
+#include "character_view.h"
 
 class Game
 {
-private:
-    sf::RenderWindow window;
-    character character;
-    Personaje personaje;
+    private:
+        sf::RenderWindow window;
+        character character;
+        Character_view Character_view;
 
-public:
-    Game();
-    void run();
+    public:
+        Game();
+        void run();
 };
 
 #endif

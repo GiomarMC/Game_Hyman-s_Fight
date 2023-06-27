@@ -1,8 +1,8 @@
 #include "game.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), personaje("E:\\Game_final_CC2\\character.png", 400, 300)
+Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("E:\\Game_final_CC2\\character.png", 400, 300)
 {
-    personaje.setPosition(400,150);
+    Character_view.setPosition(400,150);
 }
 
 void Game::run()
@@ -46,8 +46,8 @@ void Game::run()
         window.clear();
 
         // Dibujar el personaje en el view
-        personaje.setPosition(character.getX(), character.getY());
-        personaje.draw(window);
+        Character_view.setPosition(character.getX(), character.getY());
+        Character_view.draw(window);
 
         // Mostrar la ventana
         window.display();
