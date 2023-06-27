@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), personaje("E:\\Game_final_CC2\\character.png", 400, 300)
+Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), personaje("C:\\Users\\SEBASTIAN\\Documents\\JUEGO_SFML_VERSION_ALFA_ESTADO_VERDE_IMPSIBLE_DE_HACER_SI_CORRE_TODO_NICE\\Game_Hyman-s_Fight\\character.png", 400, 300)
 {
     personaje.setPosition(400,150);
 }
