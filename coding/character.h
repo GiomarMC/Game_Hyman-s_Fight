@@ -5,18 +5,20 @@
 
 class character
 {
-    private:
+    protected:
         PowerUp* powerup;
         std::string name;
         int life;
+        int base_attack;
+        int Skill;
         int movX, movY;
     public:
         character();
         int getX() const;
         int getY() const;
-        void mov(int,int);
-        void special_skill();
-        void basic_attack();
+        void motion(int,int);
+        virtual void special_skill();
+        virtual void basic_attack();
         void setpowerUp(PowerUp*);
         ~character();
 };

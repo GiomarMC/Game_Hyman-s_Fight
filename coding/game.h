@@ -2,14 +2,14 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
-#include "character.h"
+#include "character_1.h"
 #include "character_view.h"
 
 class Game
 {
     private:
         sf::RenderWindow window;
-        character character;
+        character_1 character;
         Character_view Character_view;
 
     public:

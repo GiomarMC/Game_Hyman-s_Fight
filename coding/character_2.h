@@ -9,6 +9,10 @@ class character_2:public character
         character_2();
         void special_skill();
         void basic_attack();
+        int getX() const;
+        int getY() const;
+        void mov(int, int);
+        void setpowerUp(PowerUp*);
 };
 
 #endif

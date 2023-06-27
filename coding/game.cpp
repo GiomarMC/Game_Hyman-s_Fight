@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("E:\\Game_final_CC2\\character.png", 400, 300)
+Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("D:\\Game_CC2\\Game_Hyman-s_Fight\\character.png", 400, 300)
 {
     Character_view.setPosition(400,150);
 }
