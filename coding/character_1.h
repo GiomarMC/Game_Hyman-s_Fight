@@ -11,7 +11,7 @@ class character_1:public character
         void basic_attack();
         int getX() const;
         int getY() const;
-        void mov(int, int);
+        void mov(int);
         void setpowerUp(PowerUp*);
 };
 

@@ -10,6 +10,9 @@ character::character()
     movY = 0;
     base_attack = 0;
     Skill = 0;
+    isFalling = false;
+    VelocityY = 0.0f;
+    gravity = 1.0f;
     this -> powerup = nullptr;
 }
 
@@ -23,15 +26,20 @@ int character::getY() const
     return movY;
 }
 
-void character::motion(int x, int y)
+void character::motion(int x)
 {
     movX += x;
-    movY += y;
 }
 
-void character::special_skill(){}
+void character::special_skill()
+{
 
-void character::basic_attack(){}
+}
+
+void character::basic_attack()
+{
+
+}
 
 void character::setpowerUp(PowerUp* poweup)
 {
@@ -39,7 +47,35 @@ void character::setpowerUp(PowerUp* poweup)
     powerup -> aplicarPowerUp();
 }
 
+void character::applyGravity()
+{
+    if(isFalling)
+    {
+        VelocityY += gravity;
+        movY += static_cast<int>(VelocityY);
+    }
+}
+
+void character::jump()
+{
+    VelocityY = -5.0f;
+    isFalling = true;
+}
+
+void character::update()
+{
+    applyGravity();
+    if(movY >= 0)
+    {
+        isFalling = false;
+        VelocityY = 0.0f;
+        movY = 0;
+    }
+}
+
 character::~character()
 {
-    delete powerup;
+    if (powerup != nullptr) {
+        delete powerup;
+    }
 }

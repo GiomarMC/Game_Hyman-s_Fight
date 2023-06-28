@@ -2,12 +2,12 @@
 
 character_2::character_2()
 {
-    name = "Hyman";
+    name = "Anlu";
     life = 3;
     movX = 0;
     movY = 0;
-    base_attack = 8;
-    Skill = 15;
+    base_attack = 9;
+    Skill = 14;
     this -> powerup = nullptr;
 }
 
@@ -31,9 +31,9 @@ int character_2::getY() const
     return movY;
 }
 
-void character_2::mov(int x, int y)
+void character_2::mov(int x)
 {
-    motion(x,y);
+    motion(x);
 }
 
 void character_2::setpowerUp(PowerUp* powerup)
