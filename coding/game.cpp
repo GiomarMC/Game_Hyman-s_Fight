@@ -1,11 +1,11 @@
 #include "game.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("E:\\Game_final_CC2\\character.png", 400, 300)
+Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("G:\\UNSA\\2023-A\\CC2 JUEGO\\Game_Hyman-s_Fight\\character.png", 400, 300)
 {
     Character_view.setPosition(400,150);
 }
 
-void Game::run()
+void Game::run() 
 {
     while (window.isOpen())
     {
@@ -23,9 +23,11 @@ void Game::run()
                 {
                     case sf::Keyboard::Left:
                         character.mov(-2);
+                        Character_view.moveCharacterLeft();
                         break;
                     case sf::Keyboard::Right:
                         character.mov(2);
+                        Character_view.moveCharacterRight();
                         break;
                     case sf::Keyboard::Space:
                         character.jump();
