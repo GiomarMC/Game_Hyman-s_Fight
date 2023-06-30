@@ -4,16 +4,15 @@
 #include <SFML/Graphics.hpp>
 #include "character.h"
 #include "character_view.h"
-#include "character_attributes.h"
-#include "model_controller.h"
+#include "Character_attributes.h"
 
 class Game
 {
     private:
         sf::RenderWindow window;
         Character character;
-        Character_view Character_view;
         Character_attributes character_attributes;
+        Character_view character_view;
     public:
         Game();
         void run();

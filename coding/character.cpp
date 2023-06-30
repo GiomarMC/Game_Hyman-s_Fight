@@ -7,12 +7,6 @@ Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),movX(0),
 
 }
 
-Character::Character(std::string _name,int _base_attack,int _special_skill,int _life,int _movX, int _movY):name(_name),base_attack(_base_attack),
-Special_Skill(_special_skill),life(_life),movX(_movX),movY(_movY),isFalling(false),powerup(NULL)
-{
-    
-}
-
 void Character::setName(const std::string& newName)
 {
     name = newName;

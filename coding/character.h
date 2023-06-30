@@ -15,7 +15,6 @@ class Character
         bool isFalling;
     public:
         Character();
-        Character(std::string,int,int,int,int,int);
         void setName(const std::string& newName);
         void setBaseAttack(int newBaseAttack);
         void setSpecialSkill(int newSpecialSkill);
@@ -25,9 +24,12 @@ class Character
         int getX() const;
         int getY() const;
         void motion(int);
-        void special_skill();
-        void basic_attack();
+        virtual void special_skill();
+        virtual void basic_attack();
         void setpowerUp(PowerUp*);
+        void applyGravity();
+        void jump();
+        void update();
         ~Character();
 };
 

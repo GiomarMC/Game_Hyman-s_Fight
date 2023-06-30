@@ -1,6 +1,6 @@
 #include "model_controller.h"
 
-Model_Controller::Model_Controller():character(),character_attributes()
+Model_controller::Model_controller()
 {
     character.setName(character_attributes.getCharacter_name(3));
     character.setBaseAttack(character_attributes.getCharacter_base_attack(3));

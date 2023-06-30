@@ -4,14 +4,13 @@
 #include "character.h"
 #include "Character_attributes.h"
 
-class Model_Controller
+class Model_controller
 {
     private:
         Character character;
         Character_attributes character_attributes;
     public:
-        Model_Controller();
-        
+        Model_controller();
 };
 
 #endif

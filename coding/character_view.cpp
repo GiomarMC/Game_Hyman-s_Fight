@@ -17,3 +17,20 @@ void Character_view::draw(sf::RenderWindow& window)
 {
     sprite.draw(window);
 }
+void Character_view::moveCharacterLeft() {
+    sprite.indiceX = 2;
+    if (sprite.indiceY>=0 && sprite.indiceY<= 5)
+        sprite.indiceY++;
+    else
+        sprite.indiceY=0;
+    ultimatecla = sf::Keyboard::Left;
+}
+
+void Character_view::moveCharacterRight() {
+    sprite.indiceX = 1;
+    if (sprite.indiceY>=0 && sprite.indiceY<= 5)
+        sprite.indiceY++;
+    else
+        sprite.indiceY=0;
+    ultimatecla = sf::Keyboard::Right;
+}
