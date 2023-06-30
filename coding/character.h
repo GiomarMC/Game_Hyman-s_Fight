@@ -3,30 +3,32 @@
 #include <string>
 #include "Powerup.h"
 
-class character
+class Character
 {
     protected:
         PowerUp* powerup;
         std::string name;
         int life;
         int base_attack;
-        int Skill;
+        int Special_Skill;
         int movX, movY;
         bool isFalling;
-        float VelocityY;
-        float gravity;
     public:
-        character();
+        Character();
+        Character(std::string,int,int,int,int,int);
+        void setName(const std::string& newName);
+        void setBaseAttack(int newBaseAttack);
+        void setSpecialSkill(int newSpecialSkill);
+        void setLife(int newLife);
+        void setX(int newX);
+        void setY(int newY);
         int getX() const;
         int getY() const;
         void motion(int);
-        virtual void special_skill();
-        virtual void basic_attack();
+        void special_skill();
+        void basic_attack();
         void setpowerUp(PowerUp*);
-        void applyGravity();
-        void jump();
-        void update();
-        ~character();
+        ~Character();
 };
 
 #endif

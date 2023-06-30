@@ -2,78 +2,79 @@
 #include <windows.h>
 #include <iostream>
 
-character::character()
+Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),movX(0),movY(0),isFalling(false),powerup(NULL)
 {
-    life = 3;
-    name = "Player";
-    movX = 0;
-    movY = 0;
-    base_attack = 0;
-    Skill = 0;
-    isFalling = false;
-    VelocityY = 0.0f;
-    gravity = 1.0f;
-    this -> powerup = nullptr;
+
 }
 
-int character::getX() const
+Character::Character(std::string _name,int _base_attack,int _special_skill,int _life,int _movX, int _movY):name(_name),base_attack(_base_attack),
+Special_Skill(_special_skill),life(_life),movX(_movX),movY(_movY),isFalling(false),powerup(NULL)
+{
+    
+}
+
+void Character::setName(const std::string& newName)
+{
+    name = newName;
+}
+
+void Character::setBaseAttack(int newBaseAttack)
+{
+    base_attack = newBaseAttack;
+}
+
+void Character::setSpecialSkill(int newSpecialSkill)
+{
+    Special_Skill = newSpecialSkill;
+}
+
+void Character::setLife(int newLife)
+{
+    life = newLife;
+}
+
+void Character::setX(int newX)
+{
+    movX = newX;
+}
+
+void Character::setY(int newY)
+{
+    movY = newY;
+}
+
+int Character::getX() const
 {
     return movX;
 }
 
-int character::getY() const
+int Character::getY() const
 {
     return movY;
 }
 
-void character::motion(int x)
+void Character::motion(int x)
 {
     movX += x;
 }
 
-void character::special_skill()
+void Character::special_skill()
 {
 
 }
 
-void character::basic_attack()
+void Character::basic_attack()
 {
 
 }
 
-void character::setpowerUp(PowerUp* poweup)
+void Character::setpowerUp(PowerUp* poweup)
 {
     this -> powerup = powerup;
     powerup -> aplicarPowerUp();
 }
 
-void character::applyGravity()
-{
-    if(isFalling)
-    {
-        VelocityY += gravity;
-        movY += static_cast<int>(VelocityY);
-    }
-}
-
-void character::jump()
-{
-    VelocityY = -5.0f;
-    isFalling = true;
-}
-
-void character::update()
-{
-    applyGravity();
-    if(movY >= 0)
-    {
-        isFalling = false;
-        VelocityY = 0.0f;
-        movY = 0;
-    }
-}
-
-character::~character()
+Character::~Character()
 {
     if (powerup != nullptr) {
         delete powerup;

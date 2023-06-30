@@ -1,8 +1,13 @@
-#include "game.h"
+#include "game_controller.h"
 
 Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(), Character_view("E:\\Game_final_CC2\\character.png", 400, 300)
 {
-    Character_view.setPosition(400,150);
+    character.setName(character_attributes.getCharacter_name(3));
+    character.setBaseAttack(character_attributes.getCharacter_base_attack(3));
+    character.setSpecialSkill(character_attributes.getCharacter_special_skill(3));
+    character.setLife(character_attributes.getlife());
+    character.setX(200);
+    character.setY(200);
 }
 
 void Game::run()
@@ -22,20 +27,16 @@ void Game::run()
                 switch (event.key.code)
                 {
                     case sf::Keyboard::Left:
-                        character.mov(-2);
+                        character.motion(-2);
                         break;
                     case sf::Keyboard::Right:
-                        character.mov(2);
-                        break;
-                    case sf::Keyboard::Space:
-                        character.jump();
+                        character.motion(2);
                         break;
                     default:
                         break;
                 }
             }
         }
-        character.update();
 
         // Actualizar lógica del juego en el modelo
         // ...
