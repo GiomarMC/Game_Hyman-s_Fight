@@ -1,7 +1,7 @@
 #ifndef MODEL_CONTROLLER_H
 #define MODEL_CONTROLLER_H
 
-#include "character.h"
+#include "character_model.h"
 #include "Character_attributes.h"
 
 class Model_controller

@@ -1,16 +1,16 @@
 #include "game_controller.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(),character_attributes(), character_view("E:\\Game_final_CC2\\character.png", 400, 300)
+Game_controller::Game_controller() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(),character_attributes(), character_view("E:\\Game_final_CC2\\character.png", 400, 300)
 {
     character.setName(character_attributes.getCharacter_name(3));
     character.setBaseAttack(character_attributes.getCharacter_base_attack(3));
     character.setSpecialSkill(character_attributes.getCharacter_special_skill(3));
     character.setLife(character_attributes.getlife());
-    character.setX(200);
-    character.setY(200);
+    character.setX(300);
+    character.setY(300);
 }
 
-void Game::run() 
+void Game_controller::run() 
 {
     while (window.isOpen())
     {
@@ -34,11 +34,17 @@ void Game::run()
                         character.motion(2);
                         character_view.moveCharacterRight();
                         break;
+                    case sf::Keyboard::Space:
+                        character.setInitialY(200);
+                        character.jump();
+                        break;
                     default:
                         break;
                 }
             }
         }
+        float deltatime = clock.restart().asSeconds();
+        character.update(deltatime);
         // Actualizar lógica del juego en el modelo
         // ...
 
