@@ -7,21 +7,19 @@
 class Sprite
 {
     private:
-        sf::Texture texture;
-        sf::Sprite sprite;
-        sf::Vector2f center, cambio, tamano;
-        int alto = 81;
-        int ancho = 115;
+        sf::Vector2u imageCount;
+        sf::Vector2u currentImage;
         
-
+        float totalTime;
+        float switchTime;
 
     public:
-        int indiceX = 0;
-        int indiceY = 0;
-        Sprite(const std::string& archivo, float x, float y);
-        void setPosition(float x, float y);
-        void setScale(float scaleX, float scaleY);
-        void draw(sf::RenderWindow& window);
+        sf::IntRect uvRect;
+
+        Sprite(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
+        ~Sprite();
+
+        void Update(int row, float deltaTime, bool faceright);
 };
 
 #endif

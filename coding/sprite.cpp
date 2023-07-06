@@ -1,27 +1,48 @@
 #include "sprite.h"
 
-Sprite::Sprite(const std::string& archivo, float x, float y)
+Sprite::Sprite(sf::Texture* texture, sf::Vector2u imageCount, float switchTime)
 {
-    texture.loadFromFile(archivo);
-    sprite.setTexture(texture);
-    tamano = sf::Vector2f(texture.getSize().x, texture.getSize().y);
-    center = sf::Vector2f(x, y);
-    cambio = sf::Vector2f(0, 0);
+    this->imageCount = imageCount;
+    this->switchTime = switchTime;
+    totalTime = 0.0f;
+    currentImage.x = 0;
+
+    uvRect.width = texture->getSize().x / float(imageCount.x);
+    uvRect.height = texture->getSize().y / float(imageCount.y);
 }
 
-void Sprite::setPosition(float x, float y)
+Sprite::~Sprite()
 {
-    center.x = x;
-    center.y = y;
-}
 
-void Sprite::setScale(float scaleX, float scaleY)
-{
-    sprite.setScale(scaleX, scaleY);
-}
+} 
 
-void Sprite::draw(sf::RenderWindow& window)
+void Sprite::Update(int row, float deltaTime, bool faceright)
 {
-    sprite.setPosition(center);
-    window.draw(sprite);
+    currentImage.y = row;
+    totalTime += deltaTime;
+
+    if (totalTime >= switchTime)
+    {
+        totalTime -= switchTime;
+        currentImage.x++;
+
+        if (currentImage.x >= imageCount.x)
+        {
+            currentImage.x = 0;
+
+        }
+    }
+
+    uvRect.top = currentImage.y * uvRect.height;
+
+    if (faceright)
+    {
+        uvRect.left = currentImage.x * uvRect.width;
+        uvRect.width = abs(uvRect.width);
+    } 
+    else 
+    {
+        uvRect.left = (currentImage.x + 1)* abs(uvRect.width);
+        uvRect.width = -abs(uvRect.width);
+    }
 }
