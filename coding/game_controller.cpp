@@ -1,6 +1,6 @@
 #include "game_controller.h"
 
-Game_controller::Game_controller() : window(sf::VideoMode(800, 600), "Hyman's Fight"), character(),character_attributes(), character_view("E:\\Game_final_CC2\\character.png", 400, 300)
+Game_controller::Game_controller() : character(),character_attributes(), gameview()
 {
     character.setName(character_attributes.getCharacter_name(3));
     character.setBaseAttack(character_attributes.getCharacter_base_attack(3));
@@ -10,52 +10,55 @@ Game_controller::Game_controller() : window(sf::VideoMode(800, 600), "Hyman's Fi
     character.setY(300);
 }
 
-void Game_controller::run() 
+void Game_controller::handleEvents()
 {
-    while (window.isOpen())
+    sf::Event event;
+    while (gameview.pollEvent(event))
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        if (event.type == sf::Event::Closed)
         {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
-            else if (event.type == sf::Event::KeyPressed)
-            {
-                // Controlar eventos de teclado
-                switch (event.key.code)
-                {
-                    case sf::Keyboard::Left:
-                        character.motion(-2);
-                        character_view.moveCharacterLeft();
-                        break;
-                    case sf::Keyboard::Right:
-                        character.motion(2);
-                        character_view.moveCharacterRight();
-                        break;
-                    case sf::Keyboard::Space:
-                        character.setInitialY(200);
-                        character.jump();
-                        break;
-                    default:
-                        break;
-                }
-            }
+            gameview.close();
         }
-        float deltatime = clock.restart().asSeconds();
-        character.update(deltatime);
-        // Actualizar lógica del juego en el modelo
-        // ...
+        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        {
+            gameview.close();
+        }
+        else if(event.type == sf::Event::KeyPressed)
+        {
+            pressedKeys.insert(event.key.code);
+        }
+        else if(event.type == sf::Event::KeyReleased)
+        {
+            pressedKeys.erase(event.key.code);
+        }
+        
+    }
+}
 
-        // Limpiar la ventana
-        window.clear();
+void Game_controller::update(float deltatime)
+{
+    if(pressedKeys.count(sf::Keyboard::Left) > 0)
+        character.motion(-2,0);
+    if(pressedKeys.count(sf::Keyboard::Right) > 0)
+        character.motion(2,0);
+    if(pressedKeys.count(sf::Keyboard::Space) > 0)
+    {
+       character.setPosInitialY(character.getY());
+        character.jump();
+    }
+    character.update(deltatime,400);
+}
 
-        // Dibujar el personaje en el view
-        character_view.setPosition(character.getX(), character.getY());
-        character_view.draw(window);
-
-        // Mostrar la ventana
-        window.display();
+void Game_controller::run()
+{
+    gameview.FrameLimit();
+    while (gameview.IsOpen())
+    {
+        handleEvents();
+        float deltatime = gameview.getDeltatime();
+        update(deltatime);
+        gameview.clear();
+        gameview.drawCharacter(character);
+        gameview.display();
     }
 }

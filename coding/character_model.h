@@ -1,6 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #include <string>
+#include <cmath>
 #include "Powerup.h"
 
 class Character
@@ -12,12 +13,13 @@ class Character
         int base_attack;
         int Special_Skill;
         int movX, movY;
+        float initialPosY;
+        float currentPosY;
+        float time;
+        float jumpForce;
+        static const float jumpHeight;
+        static const float gravity;
         bool isJumping;
-        bool isFalling;
-        int jumpCounter;
-        int jumpHeight;
-        int initialY;
-        float jumpSpeed;
     public:
         Character();
         void setName(const std::string&);
@@ -26,15 +28,15 @@ class Character
         void setLife(int);
         void setX(int);
         void setY(int);
-        void setInitialY(int);
+        void setPosInitialY(int);
         int getX() const;
         int getY() const;
         int getInitialY() const;
-        void motion(int);
-        void special_skill();
-        void basic_attack();
+        void motion(float,float);
+        virtual void special_skill();
+        virtual void basic_attack();
         void jump();
-        void update(float);
+        void update(float,int);
         void setpowerUp(PowerUp*);
         ~Character();
 };

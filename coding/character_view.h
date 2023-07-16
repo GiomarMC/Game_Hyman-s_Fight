@@ -7,6 +7,18 @@
 class Character_view
 {
     private:
+        Sprite sprite;
+        float posX, posY;
+        sf::Keyboard::Key ultimatecla;
+
+    public:
+        Character_view(const std::string&);
+        void setPosition(float, float);
+        void draw(sf::RenderWindow&);
+        void moveCharacterLeft();
+        void moveCharacterRight();
+    
+    /*private:
         float posX, posY;
         float deltaTime;
         sf::RectangleShape player;
@@ -18,11 +30,11 @@ class Character_view
         
 
     public:
-        Character_view(const std::string& archivo, float x, float y);
-        void setPosition(float x, float y);
-        void draw(sf::RenderWindow& window);
-        void run();
-        
+        //Character_view();
+        Character_view(const std::string&);
+        void setPosition(float, float);
+        void draw(sf::RenderWindow&);
+        void run();*/        
 };
 
 #endif
