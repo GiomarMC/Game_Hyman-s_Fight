@@ -1,11 +1,10 @@
 #include "character_model.h"
-#include <windows.h>
-#include <iostream>
 
 const float Character::jumpHeight = 100.0f;
 const float Character::gravity = 9.8f;
 
-Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),movX(0),movY(0),powerup(NULL),isJumping(false), initialPosY(0.0f), currentPosY(0.0f), time(0.0f)
+Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),movX(0),movY(0),isJumping(false), initialPosY(0.0f), currentPosY(0.0f), time(0.0f),
+powerupStarTime(std::chrono::steady_clock::now())
 {
 
 }
@@ -84,15 +83,27 @@ void Character::update(float deltatime,int groundLevel)
     }
 }
 
-void Character::setpowerUp(PowerUp* poweup)
+void Character::setpowerUp(std::unique_ptr<PowerUp> Newpowerup)
 {
-    this -> powerup = powerup;
+    powerup = std::move(Newpowerup);
     powerup -> aplicarPowerUp();
+
+    powerupStarTime = std::chrono::steady_clock::now(); 
+}
+
+void Character::checkPowerUpDuration()
+{
+    if (powerup)
+    {
+        auto currentTime = std::chrono::steady_clock::now();
+        auto durationInSeconds = std::chrono::duration_cast<std::chrono::seconds>(currentTime - powerupStarTime).count();
+
+        if (durationInSeconds >= 8)
+            powerup.reset();
+    }
 }
 
 Character::~Character()
 {
-    if (powerup != nullptr) {
-        delete powerup;
-    }
+    
 }

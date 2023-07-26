@@ -2,12 +2,14 @@
 #define CHARACTER_H
 #include <string>
 #include <cmath>
+#include <memory>
+#include <chrono>
 #include "Powerup.h"
 
 class Character
 {
     protected:
-        PowerUp* powerup;
+        std::unique_ptr<PowerUp> powerup;
         std::string name;
         int life;
         int base_attack;
@@ -20,6 +22,9 @@ class Character
         static const float jumpHeight;
         static const float gravity;
         bool isJumping;
+
+        std::chrono::steady_clock::time_point powerupStarTime;
+
     public:
         Character();
         void setName(const std::string&);
@@ -37,7 +42,8 @@ class Character
         virtual void basic_attack();
         void jump();
         void update(float,int);
-        void setpowerUp(PowerUp*);
+        void setpowerUp(std::unique_ptr<PowerUp>);
+        void checkPowerUpDuration();
         ~Character();
 };
 

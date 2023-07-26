@@ -17,6 +17,7 @@ class Character_attributes
         int getCharacter_base_attack(int);
         int getCharacter_special_skill(int);
         int getlife();
+        ~Character_attributes();
 };
 
 #endif

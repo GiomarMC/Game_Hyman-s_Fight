@@ -27,3 +27,8 @@ int Character_attributes::getlife()
 {
     return life;
 }
+
+Character_attributes::~Character_attributes()
+{
+    
+}

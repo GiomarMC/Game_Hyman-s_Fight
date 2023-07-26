@@ -2,23 +2,12 @@
 #define PERSONAJE_H
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "sprite.h"
 
 class Character_view
 {
     private:
-        Sprite sprite;
-        float posX, posY;
-        sf::Keyboard::Key ultimatecla;
-
-    public:
-        Character_view(const std::string&);
-        void setPosition(float, float);
-        void draw(sf::RenderWindow&);
-        void moveCharacterLeft();
-        void moveCharacterRight();
-    
-    /*private:
         float posX, posY;
         float deltaTime;
         sf::RectangleShape player;
@@ -28,13 +17,10 @@ class Character_view
         sf::RenderWindow window;
         Sprite sprite;
         
-
     public:
-        //Character_view();
         Character_view(const std::string&);
         void setPosition(float, float);
         void draw(sf::RenderWindow&);
-        void run();*/        
 };
 
 #endif

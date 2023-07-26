@@ -1,13 +1,8 @@
 #include "game_controller.h"
 
-Game_controller::Game_controller() : character(),character_attributes(), gameview()
+Game_controller::Game_controller() : gameModel(), gameview()
 {
-    character.setName(character_attributes.getCharacter_name(3));
-    character.setBaseAttack(character_attributes.getCharacter_base_attack(3));
-    character.setSpecialSkill(character_attributes.getCharacter_special_skill(3));
-    character.setLife(character_attributes.getlife());
-    character.setX(300);
-    character.setY(300);
+    gameModel.initializeCharacter();
 }
 
 void Game_controller::handleEvents()
@@ -37,28 +32,53 @@ void Game_controller::handleEvents()
 
 void Game_controller::update(float deltatime)
 {
+    auto characterptr = gameModel.getCharacter();
     if(pressedKeys.count(sf::Keyboard::Left) > 0)
-        character.motion(-2,0);
+        characterptr -> motion(-2,0);
     if(pressedKeys.count(sf::Keyboard::Right) > 0)
-        character.motion(2,0);
+        characterptr -> motion(2,0);
     if(pressedKeys.count(sf::Keyboard::Space) > 0)
     {
-       character.setPosInitialY(character.getY());
-        character.jump();
+        characterptr -> setPosInitialY(characterptr -> getY());
+        characterptr -> jump();
     }
-    character.update(deltatime,400);
+    gameModel.updateCharacter(deltatime);
 }
 
 void Game_controller::run()
 {
+    gameview.setMenuActive(true);
     gameview.FrameLimit();
     while (gameview.IsOpen())
     {
         handleEvents();
         float deltatime = gameview.getDeltatime();
-        update(deltatime);
-        gameview.clear();
-        gameview.drawCharacter(character);
-        gameview.display();
+
+        if (gameview.getMenuActive())
+        {
+            Menu menu(gameview.getWindow());
+            int option = menu.mostrar();
+            if (option == 1)
+            {
+                std::cout << "\nIniciando el juego\n";
+                gameview.setMenuActive(false);
+            }
+            else if (option == 2)
+            {
+                std::cout << "\nConfiguracion del juego\n";
+            }
+            else if (option == 3)
+            {
+                std::cout << "\nSaliendo del juego\n";
+                break;
+            }
+        }
+        else
+        {
+            update(deltatime);
+            gameview.clear();
+            gameview.drawCharacter(*gameModel.getCharacter());
+            gameview.display();
+        }
     }
 }

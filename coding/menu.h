@@ -9,7 +9,6 @@ class Menu {
 public:
     Menu(sf::RenderWindow&);
     int mostrar();
-    void ejecutar();
 
 private:
     sf::RenderWindow& window;
@@ -21,8 +20,8 @@ private:
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
 
-    void configurarBoton(sf::RectangleShape& button, const std::string& buttonText, float windowHeight);
-    void dibujarBoton(const sf::RectangleShape& button);
+    void configurarBoton(sf::RectangleShape&, const std::string&, float);
+    void dibujarBoton(const sf::RectangleShape&);
     void dibujarTexto();
     
 };
