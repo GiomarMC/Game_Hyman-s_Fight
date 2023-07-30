@@ -9,18 +9,15 @@ class Character_view
 {
     private:
         float posX, posY;
-        float deltaTime;
-        sf::RectangleShape player;
-        sf::Texture playerTexture;
-        sf::Vector2f playertexturesize, playertexturecenter, playertexturecambio;
-        sf::Clock clock;
-        sf::RenderWindow window;
         Sprite sprite;
-        
+        std::vector<int>character_sprite;
+
     public:
         Character_view(const std::string&);
         void setPosition(float, float);
         void draw(sf::RenderWindow&);
+        void printCharacter(int);
+        void moveCharacterNone(int,float); 
 };
 
 #endif

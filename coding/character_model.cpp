@@ -3,7 +3,7 @@
 const float Character::jumpHeight = 100.0f;
 const float Character::gravity = 9.8f;
 
-Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),movX(0),movY(0),isJumping(false), initialPosY(0.0f), currentPosY(0.0f), time(0.0f),
+Character::Character():name(""),base_attack(0),Special_Skill(0),life(0),posX(0),posY(0),isJumping(false), VelocityY(0.0f), jumpSpeed(0.0f), initialPosY(0.0f), currentPosY(0.0f), time(0.0f), plataformPosX(0), plataformPosY(0),
 powerupStarTime(std::chrono::steady_clock::now())
 {
 
@@ -17,22 +17,26 @@ void Character::setSpecialSkill(int newSpecialSkill) {Special_Skill = newSpecial
 
 void Character::setLife(int newLife) {life = newLife;}
 
-void Character::setX(int newX) {movX = newX;}
+void Character::setX(int newX) {posX = newX;}
 
-void Character::setY(int newY) {movY = newY;}
+void Character::setY(int newY) {posY = newY;}
 
 void Character::setPosInitialY(int Y) {initialPosY = Y;}
 
-int Character::getX() const {return movX;}
+void Character::setPlataformPosX(float POSX) {plataformPosX = POSX;}
 
-int Character::getY() const {return movY;}
+void Character::setPlataformPosY(float POSY) {plataformPosY = POSY;}
+
+int Character::getX() const {return posX;}
+
+int Character::getY() const {return posY;}
 
 int Character::getInitialY() const {return initialPosY;}
 
 void Character::motion(float x, float y)
 {
-    movX += x;
-    movY += y;
+    posX += x;
+    posY += y;
 }
 
 void Character::special_skill() {}
@@ -44,9 +48,9 @@ void Character::jump()
     if(!isJumping)
     {
         isJumping = true;
-        initialPosY = static_cast<float>(movY);
-        currentPosY = initialPosY;
-        time = 0.0f;
+        float jumpDuration = 2.0f * sqrtf(jumpHeight/gravity);
+        jumpSpeed = gravity * jumpDuration;
+        VelocityY = -sqrtf(2.0f * gravity * jumpSpeed);
     }
 }
 
@@ -54,33 +58,15 @@ void Character::update(float deltatime,int groundLevel)
 {
     if(isJumping)
     {
-        float jumpDuration = 2.0f * sqrtf(jumpHeight/gravity);
-        time += deltatime;
-        if(time <= jumpDuration)
-            currentPosY = initialPosY - gravity * time * (jumpDuration - time);
-        else
-        {
+        VelocityY += gravity * deltatime;
+        posY += static_cast<int>(VelocityY * deltatime);
+        if (posY >= groundLevel) {
+            posY = groundLevel;
             isJumping = false;
-            currentPosY = initialPosY;
-        }
-
-        movY = static_cast<int>(currentPosY);
-    }
-    else
-    {
-        int prevPosy = movY;
-        movY += static_cast<int>(gravity*deltatime);
-
-        if(movY <= groundLevel)
-        {
-            movY = groundLevel;
-            if(prevPosy > groundLevel)
-            {
-                isJumping = false;
-                currentPosY = static_cast<float>(movY);
-            }
+            VelocityY = 0.0f;
         }
     }
+    
 }
 
 void Character::setpowerUp(std::unique_ptr<PowerUp> Newpowerup)

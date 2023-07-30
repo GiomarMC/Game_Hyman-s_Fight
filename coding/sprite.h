@@ -6,16 +6,19 @@
 class Sprite
 {
     private:
-        sf::Vector2u imageCount;
-        sf::Vector2u currentImage;
-        
-        float totalTime;
-        float switchTime;
+        sf::Texture texture;
+        sf::Sprite sprite;
+        sf::Vector2f center;
+        int fila;
+        int columna;        
 
     public:
-        sf::IntRect uvRect;
-        Sprite(sf::Texture*, sf::Vector2u, float);
-        void Update(int, float, bool);
+        Sprite(const std::string&);
+        void setMove(int, int);
+        void setNoMove(int, int, float);
+        void setPosition(float, float);
+        void setScale(float, float);
+        void draw(sf::RenderWindow&);
         ~Sprite();
 };
 

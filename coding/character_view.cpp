@@ -1,38 +1,35 @@
 #include "character_view.h"
 
-Character_view::Character_view(const std::string &archivo)
-:player(sf::Vector2f(150.0f,150.0f)),sprite(&playerTexture, sf::Vector2u(5,6),0.3f)
+Character_view::Character_view(const std::string &archivo) : sprite(archivo)
 {
-    deltaTime = 0.0f;
-    playerTexture.loadFromFile(archivo);
-    player.setTexture(&playerTexture);
+    sprite.setScale(1.5f,1.5f);
+    //ARRAY DE CANTIDAD DE SPRITES POR FILA
+    character_sprite = {8,8,8,8,4};    
 }
 
 void Character_view::setPosition(float x, float y)
 {
     posX = x;
     posY = y;
-    player.setPosition(posX, posY);
-    player.setScale(0.5f, 0.5f);
+    sprite.setPosition(posX, posY);
 }
 
-void Character_view::draw(sf::RenderWindow &window)
+void Character_view::draw(sf::RenderWindow& window)
 {
-    deltaTime = clock.restart().asSeconds();
+    sprite.draw(window);
+}
 
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        switch (event.type)
-        {
-            case sf::Event::Closed:
-                window.close();
-                break;
-        }
-    }
+//DIBUJA EL SPRITE DEPENDIENTE DE LAS TECLAS PRESIONADAS
+void Character_view::printCharacter(int n)
+{ 
+    int x = character_sprite[n];
+    sprite.setMove(n, x);
+    sprite.setScale(0.5f,0.5f);
+}
 
-    sprite.Update(0,deltaTime,false);
-
-    player.setTextureRect(sprite.uvRect);
-    window.draw(player);
+//DIBUJA EL SPRITE INDEPENDIENTE
+void Character_view::moveCharacterNone(int n, float deltaTime)
+{
+    int x = character_sprite[n];
+    sprite.setNoMove(n, x, deltaTime);
 }

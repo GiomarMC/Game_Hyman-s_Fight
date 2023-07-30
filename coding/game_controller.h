@@ -4,7 +4,6 @@
 #include <unordered_set>
 #include "game_view_controller.h"
 #include "game_model_controller.h"
-#include "menu.h"
 
 class Game_controller
 {
@@ -12,9 +11,13 @@ class Game_controller
         Game_Model gameModel;
         Game_View<Character> gameview;
         std::unordered_set<sf::Keyboard::Key> pressedKeys;
+        sf::Keyboard::Key ultimatecla;
+        int row;
+        bool is_move;
     public:
         Game_controller();
         void handleEvents();
+        void drawPlataforms();
         void update(float);
         void run();
 };

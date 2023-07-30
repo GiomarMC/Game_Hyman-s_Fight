@@ -1,48 +1,49 @@
 #include "sprite.h"
+#include <iostream>
 
-Sprite::Sprite(sf::Texture* texture, sf::Vector2u imageCount, float switchTime)
+Sprite::Sprite(const std::string& archivo)
 {
-    this->imageCount = imageCount;
-    this->switchTime = switchTime;
-    totalTime = 0.0f;
-    currentImage.x = 0;
+    texture.loadFromFile(archivo);
+    sprite.setTextureRect(sf::IntRect(0, 0, 120, 120));
+    sprite.setTexture(texture);
+    center = sf::Vector2f(200, 400);
+    columna = 0;
+    //std::cout << sprite.getGlobalBounds().width << ", " << sprite.getGlobalBounds().height;
+}
 
-    uvRect.width = texture->getSize().x / float(imageCount.x);
-    uvRect.height = texture->getSize().y / float(imageCount.y);
+void Sprite::setMove(int fila, int limit){
+    this->fila = fila;
+    columna++;
+    columna = columna % limit;
+    sprite.setTextureRect(sf::IntRect(columna * 120, fila * 120, 120, 120));
+}
+
+void Sprite::setNoMove(int fila, int limit, float deltaTime){
+    this->fila = fila;
+    columna++;
+    columna = columna % limit;
+    sprite.setTextureRect(sf::IntRect(columna * 120, fila * 120, 120, 120)); 
+}
+
+void Sprite::setPosition(float x, float y)
+{
+    center.x = x;
+    center.y = y;
+}
+
+void Sprite::setScale(float scaleX, float scaleY)
+{
+    sprite.setScale(scaleX, scaleY);
+    //std::cout << sprite.getGlobalBounds().width << ", " << sprite.getGlobalBounds().height;
+}
+
+void Sprite::draw(sf::RenderWindow& window)
+{
+    sprite.setPosition(center);
+    window.draw(sprite);
 }
 
 Sprite::~Sprite()
 {
 
 } 
-
-void Sprite::Update(int row, float deltaTime, bool faceright)
-{
-    currentImage.y = row;
-    totalTime += deltaTime;
-
-    if (totalTime >= switchTime)
-    {
-        totalTime -= switchTime;
-        currentImage.x++;
-
-        if (currentImage.x >= imageCount.x)
-        {
-            currentImage.x = 0;
-
-        }
-    }
-
-    uvRect.top = currentImage.y * uvRect.height;
-
-    if (faceright)
-    {
-        uvRect.left = currentImage.x * uvRect.width;
-        uvRect.width = abs(uvRect.width);
-    } 
-    else 
-    {
-        uvRect.left = (currentImage.x + 1)* abs(uvRect.width);
-        uvRect.width = -abs(uvRect.width);
-    }
-}

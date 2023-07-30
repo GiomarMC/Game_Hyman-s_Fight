@@ -11,14 +11,11 @@ class Character
     protected:
         std::unique_ptr<PowerUp> powerup;
         std::string name;
-        int life;
-        int base_attack;
-        int Special_Skill;
-        int movX, movY;
+        int life, base_attack, Special_Skill;
+        int posX, posY;
         float initialPosY;
         float currentPosY;
         float time;
-        float jumpForce;
         static const float jumpHeight;
         static const float gravity;
         bool isJumping;
