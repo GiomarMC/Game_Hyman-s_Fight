@@ -48,7 +48,7 @@ void Game_controller::update(float deltatime)
     auto characterptr = gameModel.getCharacter();
     auto plataformas = gameModel.getMapaModel().getPlataformas();
     bool characterOnPlataform = false;
-    if(characterptr -> getX() >= plataformas[0].getPosX() && characterptr -> getX() + 30 <= plataformas[0].getPosX() + plataformas[0].getWidth())
+     if(characterptr -> getX() >= plataformas[0].getPosX() && characterptr -> getX() + 30 <= plataformas[0].getPosX() + plataformas[0].getWidth())
     {
         characterptr -> setY(plataformas[0].getPosY() - 40);
         characterptr -> update(deltatime, plataformas[0].getPosY() - 60);

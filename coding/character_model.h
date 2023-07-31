@@ -12,7 +12,7 @@ class Character
         std::unique_ptr<PowerUp> powerup;
         std::string name;
         int life, base_attack, Special_Skill;
-        int posX, posY;
+        float posX, posY;
         float initialPosY;
         float currentPosY;
         float time;
@@ -28,11 +28,11 @@ class Character
         void setBaseAttack(int);
         void setSpecialSkill(int);
         void setLife(int);
-        void setX(int);
-        void setY(int);
-        void setPosInitialY(int);
-        int getX() const;
-        int getY() const;
+        void setX(float);
+        void setY(float);
+        void setPosInitialY(float);
+        float getX() const;
+        float getY() const;
         int getInitialY() const;
         void motion(float,float);
         virtual void special_skill();
