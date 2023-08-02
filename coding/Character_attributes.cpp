@@ -8,19 +8,34 @@ Character_attributes::Character_attributes()
     life = 3;
 }
 
-std::string Character_attributes::getCharacter_name(int i)
+Character Character_attributes::getCharacterPorEleccion(int eleccion)
 {
-    return character_name[i];
+    if(eleccion >=1 && eleccion <= character_name.size())
+    {
+        int index = eleccion - 1 ;
+        Character Personaje_Elegido;
+        Personaje_Elegido.setName(character_name[index]);
+        Personaje_Elegido.setBaseAttack(character_base_attack[index]);
+        Personaje_Elegido.setSpecialSkill(character_special_skill[index]);
+        Personaje_Elegido.setLife(life);
+        return Personaje_Elegido;
+    } 
+    return Character();
 }
 
-int Character_attributes::getCharacter_base_attack(int i)
+std::string Character_attributes::getCharacter_name(int eleccion)
 {
-    return character_base_attack[i];
+    return character_name[eleccion];
 }
 
-int Character_attributes::getCharacter_special_skill(int i)
+int Character_attributes::getCharacter_base_attack(int eleccion)
 {
-    return character_special_skill[i];
+    return character_base_attack[eleccion];
+}
+
+int Character_attributes::getCharacter_special_skill(int eleccion)
+{
+    return character_special_skill[eleccion];
 }
 
 int Character_attributes::getlife()

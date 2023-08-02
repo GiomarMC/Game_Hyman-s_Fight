@@ -9,10 +9,12 @@
 class Character
 {
     protected:
-        std::unique_ptr<PowerUp> powerup;
+        std::shared_ptr<PowerUp> powerup;
         std::string name;
         int life, base_attack, Special_Skill;
         float posX, posY;
+        //float velocityY;
+        float groundLevel;
         float initialPosY;
         float currentPosY;
         float time;
@@ -31,6 +33,7 @@ class Character
         void setX(float);
         void setY(float);
         void setPosInitialY(float);
+        void setGroundLevel(float);
         float getX() const;
         float getY() const;
         int getInitialY() const;
@@ -38,7 +41,7 @@ class Character
         virtual void special_skill();
         virtual void basic_attack();
         void jump();
-        void update(float,int);
+        void update(float);
         void setpowerUp(std::unique_ptr<PowerUp>);
         void checkPowerUpDuration();
         ~Character();

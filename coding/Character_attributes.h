@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "character_model.h"
 
 class Character_attributes
 {
@@ -13,6 +14,7 @@ class Character_attributes
         int life;
     public:
         Character_attributes();
+        Character getCharacterPorEleccion(int eleccion);
         std::string getCharacter_name(int);
         int getCharacter_base_attack(int);
         int getCharacter_special_skill(int);

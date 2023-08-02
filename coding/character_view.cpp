@@ -20,16 +20,16 @@ void Character_view::draw(sf::RenderWindow& window)
 }
 
 //DIBUJA EL SPRITE DEPENDIENTE DE LAS TECLAS PRESIONADAS
-void Character_view::printCharacter(int n)
+void Character_view::printCharacter(int numPos)
 { 
-    int x = character_sprite[n];
-    sprite.setMove(n, x);
+    int x = character_sprite[numPos];
+    sprite.setMove(numPos, x);
     sprite.setScale(0.5f,0.5f);
 }
 
 //DIBUJA EL SPRITE INDEPENDIENTE
-void Character_view::moveCharacterNone(int n, float deltaTime)
+void Character_view::moveCharacterNone(int numPos, float deltaTime)
 {
-    int x = character_sprite[n];
-    sprite.setNoMove(n, x, deltaTime);
+    int x = character_sprite[numPos];
+    sprite.setNoMove(numPos, x, deltaTime);
 }
