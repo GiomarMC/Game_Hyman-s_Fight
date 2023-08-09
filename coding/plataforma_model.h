@@ -1,10 +1,15 @@
 #ifndef PLATAFORMA_H
 #define PLATAFORMA_H
 
+#include <memory>
+
 class Plataforma
 {
     private:
-        float PosX, PosY, width, height;
+        std::shared_ptr<float> PosX;
+        std::shared_ptr<float> PosY;
+        std::shared_ptr<float> width;
+        std::shared_ptr<float> height;
     public:
         Plataforma();
         float getPosX() const;

@@ -7,24 +7,25 @@
 #include <time.h>
 #include <type_traits>
 #include <cmath>
+#include <memory>
 
 class Menu
 {
-    private:    
+    private:
         bool estado = false;
         int cont = 0;
         float Ancho, Alto;
         float posX, posY;
-        sf::RectangleShape* boton;
+        std::shared_ptr<sf::RectangleShape> boton;
         int mouseX;
         int mouseY;
         bool is_MenuActive;
 
     protected:
         sf::Text texto;
-    public:     
+    public:
         Menu();
-        Menu(sf::RectangleShape&, float, float, int, int, sf::Color);
+        Menu(std::shared_ptr<sf::RectangleShape>, float, float, int, int, sf::Color);
         void mostrar();
         void funcion();
         float getposX();

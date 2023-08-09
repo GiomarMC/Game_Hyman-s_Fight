@@ -10,8 +10,8 @@ void Game_Model::initializeCharacter()
     int eleccion; // Asegúrate de inicializar eleccion con algún valor adecuado antes de usarlo
     character = std::make_shared<Character>();
     *character = character_attributes.getCharacterPorEleccion(eleccion);
-    character->setX(100);
-    character->setY(200);
+    character -> setX(100);
+    character -> setY(200);
 }
 
 void Game_Model::updateCharacter(float deltatime)

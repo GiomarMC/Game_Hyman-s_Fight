@@ -4,11 +4,11 @@ Menu::Menu(): Alto(0), Ancho(0), is_MenuActive(true)
 {
 
 }
-Menu::Menu(sf::RectangleShape& button, float ancho, float alto, int x, int y, sf::Color color): Ancho(ancho), 
-Alto(alto), posX(x), posY(y), boton(&button)
+Menu::Menu(std::shared_ptr<sf::RectangleShape> button, float ancho, float alto, int x, int y, sf::Color color): Ancho(ancho), 
+Alto(alto), posX(x), posY(y), boton(button)
 {
-    button.setPosition(posX, posY);
-    button.setFillColor(color);
+    button -> setPosition(posX, posY);
+    button -> setFillColor(color);
 }
 
 float Menu::getposX() { return posX; }
@@ -23,13 +23,12 @@ sf::Text Menu::getTexto() {return texto;}
 sf::RectangleShape Menu::getboton() {return *boton;}
 void Menu::setIsMenuActive(bool state) {is_MenuActive = state;}
 
-void Menu::funcion() {
-    estado = true;
-}
+void Menu::funcion() {estado = true;}
 
-void Menu::pressed(int i) {
-    boton->setSize(sf::Vector2f(Ancho + (10 * i), Alto + (10 * i)));
-    boton->setPosition(posX - (5 * i), posY - (5 * i));
+void Menu::pressed(int i)
+{
+    boton -> setSize(sf::Vector2f(Ancho + (10 * i), Alto + (10 * i)));
+    boton -> setPosition(posX - (5 * i), posY - (5 * i));
 }
 void Menu::setText(const std::string& str, const sf::Font& font, unsigned int characterSize, const sf::Color& color) {
     texto.setFont(font);
@@ -61,21 +60,23 @@ void Menu::mostrar()
         static_cast<float>(windowSize.x) / backgroundTexture.getSize().x,
         static_cast<float>(windowSize.y) / backgroundTexture.getSize().y
     );
-    sf::RectangleShape mp1(sf::Vector2f(300.0f, 300.0f));
-    sf::RectangleShape mp2(sf::Vector2f(300.0f, 300.0f));
-    sf::RectangleShape mp3(sf::Vector2f(300.0f, 300.0f));
-    sf::RectangleShape b1(sf::Vector2f(100.0f, 100.0f));
-    sf::RectangleShape b2(sf::Vector2f(110.0f, 100.0f));
-    sf::RectangleShape b3(sf::Vector2f(100.0f, 100.0f));
-    sf::RectangleShape* cuadros = new sf::RectangleShape[6];
+    std::shared_ptr<sf::RectangleShape> mp1 = std::make_shared<sf::RectangleShape>(sf::Vector2f(300.0f, 300.0f));
+    std::shared_ptr<sf::RectangleShape> mp2 = std::make_shared<sf::RectangleShape>(sf::Vector2f(300.0f, 300.0f));
+    std::shared_ptr<sf::RectangleShape> mp3 = std::make_shared<sf::RectangleShape>(sf::Vector2f(300.0f, 300.0f));
+    std::shared_ptr<sf::RectangleShape> b1 = std::make_shared<sf::RectangleShape>(sf::Vector2f(100.0f, 100.0f));
+    std::shared_ptr<sf::RectangleShape> b2 = std::make_shared<sf::RectangleShape>(sf::Vector2f(110.0f, 100.0f));
+    std::shared_ptr<sf::RectangleShape> b3 = std::make_shared<sf::RectangleShape>(sf::Vector2f(100.0f, 100.0f));
+    std::shared_ptr<sf::RectangleShape> cuadros[6];
 
     Menu* square = new Menu[6];
 
 
-    for (int i = 0; i < 6; i++) {
-        cuadros[i] = b2;
-        Menu boton3(cuadros[i], 100.0f, 110.0f, 50 + 200 * i, 300, sf::Color::Black);
-        square[i]=boton3;
+    for (int i = 0; i < 6; i++) 
+    {
+        std::shared_ptr<sf::RectangleShape> cuadroShape = std::make_shared<sf::RectangleShape>(*b2);
+        cuadros[i] = cuadroShape;
+        Menu boton3(cuadroShape, 100.0f, 110.0f, 50 + 200 * i, 300, sf::Color::Black);
+        square[i] = boton3;
     }
 
 
@@ -198,7 +199,7 @@ void Menu::mostrar()
         }
 
         if (!boton1.getEstado() || boton2.getEstado()) {
-            window.draw(b1);
+            window.draw(*b1);
         }
 
         // Dibujar el texto en el botón amarillo solo cuando no está presionado

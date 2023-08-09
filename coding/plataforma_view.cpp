@@ -2,11 +2,12 @@
 
 Plataforma_view::Plataforma_view(const std::string& path)
 {
-    if(!texture.loadFromFile(path))
+    texture = std::make_shared<sf::Texture>();
+    if(!texture -> loadFromFile(path))
     {
         std::cout << "Error al cargar la imagen";
     }
-    plataformShape.setTexture(texture);
+    plataformShape.setTexture(*texture);
 }
 
 void Plataforma_view::setPlataformData(float x, float y, float width, float height)

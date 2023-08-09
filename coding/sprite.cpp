@@ -3,9 +3,13 @@
 
 Sprite::Sprite(const std::string& archivo)
 {
-    texture.loadFromFile(archivo);
+    texture = std::make_shared<sf::Texture>();
+    if (!texture -> loadFromFile(archivo))
+    {
+        std::cout << "Error al cargar la imagen: " << archivo << std::endl;
+    }
     sprite.setTextureRect(sf::IntRect(0, 0, 120, 120));
-    sprite.setTexture(texture);
+    sprite.setTexture(*texture);
     center = sf::Vector2f(200, 400);
     columna = 0;
     //std::cout << sprite.getGlobalBounds().width << ", " << sprite.getGlobalBounds().height;

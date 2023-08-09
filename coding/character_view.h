@@ -17,7 +17,7 @@ class Character_view
         void setPosition(float, float);
         void draw(sf::RenderWindow&);
         void printCharacter(int);
-        void moveCharacterNone(int,float); 
+        void moveCharacterNone(int,float);
 };
 
 #endif

@@ -62,7 +62,7 @@ class Game_View
         void drawPlataform(float, float, float, float);
 };
 
-template <class T> Game_View<T>::Game_View():window(sf::VideoMode(800,600), "Hyman's Fight"), character_view("Images\\spritesheet.png"), plataformaView("Images\\plataforma_1.png"),
+template <class T> Game_View<T>::Game_View():window(sf::VideoMode(800,600), "Hyman's Fight"), character_view("Images\\SpriteCatW.png"), plataformaView("Images\\plataforma_1.png"),
 is_move(true), is_Jumping(false), is_Left(false), is_Right(false), posX(0), posY(0)
 {
     if(!backgroundTexture.loadFromFile("Images\\cielo_azul.jpg"))
@@ -163,7 +163,6 @@ template <class T> void Game_View<T>::handleEvents()
         if(event.type == sf::Event::KeyReleased)
         {
             pressedKeys.erase(event.key.code);
-            pressedKeys.erase(event.key.code);
             if (ultimatecla == sf::Keyboard::Right)
                 row = 0;
             else 
@@ -181,7 +180,7 @@ template <class T> void Game_View<T>::update()
         posY = 0;
         is_Left = true;
         ultimatecla = sf::Keyboard::Right;
-        row = 2;
+        row = 4;
     }
             
     else if(pressedKeys.count(sf::Keyboard::Right) > 0)
@@ -197,17 +196,17 @@ template <class T> void Game_View<T>::update()
     {
         is_Jumping = true;
         if (ultimatecla == sf::Keyboard::Right)
-            row = 4;
+            row = 0;
         else
-            row = 4;
+            row = 2;
     }
     else if(pressedKeys.count(sf::Keyboard::Down) > 0) //PELEA
     {
         //characterptr -> fight();
         if (ultimatecla == sf::Keyboard::Right)
-            row = 1; //6
+            row = 0; //6
         else 
-            row = 0; //7
+            row = 4; //7
     }
     else
     {

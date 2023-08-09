@@ -2,9 +2,11 @@
 #include <iostream>
 
 
-CharacterMenu::CharacterMenu() : personajeSeleccionado(false), is_Finally(false)
+CharacterMenu::CharacterMenu()
 {
-    
+    personajeSeleccionado = std::make_shared<bool>(false);
+    selectedCharacter = std::make_shared<Character>();
+    is_Finally = std::make_shared<bool>(false);
 }
 
 void CharacterMenu::handleClick(int mouseX, int mouseY)
@@ -21,7 +23,7 @@ void CharacterMenu::handleClick(int mouseX, int mouseY)
         if (mouseX >= squarePosX && mouseX <= squarePosX + squareWidth &&
             mouseY >= squarePosY && mouseY <= squarePosY + squareHeight)
         {
-            selectedCharacter = characterAttributes.getCharacterPorEleccion(i + 1);
+            *selectedCharacter = characterAttributes.getCharacterPorEleccion(i + 1);
             std::cout << "#####################################" << std::endl;
             std::cout << "#- Informacion del Personaje:" << "     ##" << std::endl;
             std::cout << "#- Nombre: " << characterAttributes.getCharacter_name(i) << "                ##" << std::endl;
@@ -30,7 +32,7 @@ void CharacterMenu::handleClick(int mouseX, int mouseY)
             std::cout << "#- Vida: " << characterAttributes.getlife() << "                         ##" << std::endl;
             std::cout << "#####################################" << std::endl;
             std::cout << std::endl;
-            personajeSeleccionado = true; // Establecer como verdadero al seleccionar un personaje
+            *personajeSeleccionado = true; // Establecer como verdadero al seleccionar un personaje
 
         }
     }
@@ -61,12 +63,12 @@ void CharacterMenu::handleMapSelection(int mouseX, int mouseY)
             selectedMap = i + 1;
         }
     }
-    is_Finally = true;
+    *is_Finally = true;
 }
 
-bool CharacterMenu::getIs_Finally() const {return is_Finally;}
+bool CharacterMenu::getIs_Finally() const {return *is_Finally;}
 
 Character CharacterMenu::getSelectedCharacter() const
 {
-    return selectedCharacter;
+    return *selectedCharacter;
 }

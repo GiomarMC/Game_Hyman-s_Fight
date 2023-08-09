@@ -2,11 +2,12 @@
 #define SPRITE_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class Sprite
 {
     private:
-        sf::Texture texture;
+        std::shared_ptr<sf::Texture> texture;
         sf::Sprite sprite;
         sf::Vector2f center;
         int fila;

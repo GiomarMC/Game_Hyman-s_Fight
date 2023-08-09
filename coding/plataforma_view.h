@@ -3,11 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <memory>
 
 class Plataforma_view
 {
     private:
-        sf::Texture texture;
+        std::shared_ptr<sf::Texture> texture;
         sf::Sprite plataformShape;
         float posX, posY;
     public:

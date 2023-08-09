@@ -4,15 +4,16 @@
 #include <string>
 #include <vector>
 #include "plataforma_model.h"
+#include <memory>
 
 class Mapa_model
 {
     private:
-        std::vector<Plataforma> plataforma;
+        std::vector<std::shared_ptr<Plataforma>> plataforma;
     public:
         Mapa_model();
         void crearPlataforma();
-        const std::vector<Plataforma>& getPlataformas() const;
+        const std::vector<std::shared_ptr<Plataforma>>& getPlataformas() const;
 };
 
 #endif
